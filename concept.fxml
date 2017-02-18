@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+
+<BorderPane id="BorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
+  <center>
+    <Pane prefHeight="200.0" prefWidth="200.0" />
+  </center>
+  <left>
+    <SplitPane dividerPositions="0.8365122615803815" focusTraversable="true" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
+      <items>
+        <TilePane alignment="TOP_CENTER" minHeight="-Infinity" minWidth="-Infinity" orientation="HORIZONTAL" prefHeight="193.0" prefWidth="158.0" />
+        <Pane prefHeight="200.0" prefWidth="200.0">
+          <children>
+            <ListView layoutX="0.0" layoutY="0.0" prefHeight="200.0" prefWidth="160.0" />
+          </children>
+        </Pane>
+      </items>
+    </SplitPane>
+  </left>
+  <top>
+    <ToolBar>
+      <items>
+        <Button mnemonicParsing="false" text="Button" />
+      </items>
+    </ToolBar>
+  </top>
+</BorderPane>

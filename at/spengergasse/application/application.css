@@ -2,3 +2,18 @@
 #splitPane{
 	
 }
+
+#toolPanel{
+	-fx-min-width: 200px ;
+	-fx-background-color: rgb(170,170,170);
+}
+
+#canvasPanel{
+	-fx-background-color: white ;
+	-fx-min-width: 600px ;
+}
+
+#optionsPanel{
+	-fx-background-color: rgb(170,170,170);
+	-fx-min-width: 200px ;
+}

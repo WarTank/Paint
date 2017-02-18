@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<SplitPane xmlns:fx="http://javafx.com/fxml/1" fx:id="splitPane">
+	
+	<items>
+		<fx:include fx:id="toolPanel" source="panels/ToolPanel.fxml"/>
+        <fx:include fx:id="canvasPanel" source="panels/CanvasPanel.fxml"/>
+        <fx:include fx:id="optionsPanel" source="panels/OptionsPanel.fxml"/>
+	</items>
+</SplitPane>
+
