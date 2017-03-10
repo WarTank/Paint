@@ -1,6 +1,8 @@
 package spengergasse.application;
 
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -9,8 +11,11 @@ import javafx.scene.image.PixelReader;
 import javafx.scene.image.PixelWriter;
 import javafx.scene.image.WritableImage;
 import javafx.scene.paint.Color;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import spengergasse.model.MousePositionThread;
+
+import java.io.File;
 
 /**
  * Created by HER17491 on 10.03.2017.
@@ -50,6 +55,18 @@ public class ImageTest extends Application {
             MousePositionThread mpt = new MousePositionThread(this);
             Thread mptt = new Thread(mpt);
             mptt.start();
+
+
+            itc.button.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(final ActionEvent event) {
+                    FileChooser fileChooser = new FileChooser();
+                    File file = fileChooser.showOpenDialog(primaryStage);
+                    if(file != null){
+                        itc.imageView.setImage(new Image(file.toURI().toString()));
+                    }
+                }
+            });
 
             Scene scene = new Scene(root,1280,720);
             scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
