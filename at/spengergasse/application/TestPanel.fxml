@@ -9,9 +9,9 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<SplitPane dividerPositions="0.29797979797979796" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.112" fx:controller="spengergasse.application.ImageTestController">
+<SplitPane dividerPositions="0.2709030100334448" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="spengergasse.application.ImageTestController">
   <items>
-    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="398.0" prefWidth="115.0">
          <children>
             <GridPane prefHeight="74.0" prefWidth="175.0">
               <columnConstraints>
@@ -24,15 +24,16 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Label text="X:" fx:id="xPos" />
-                  <Label fx:id="yPos" text="Y:" GridPane.rowIndex="1" />
-                  <Button fx:id="button" mnemonicParsing="false" text="Import" GridPane.columnIndex="1" />
+                  <Label text="X:" GridPane.rowIndex="2" fx:id="xPos" />
+                  <Label fx:id="yPos" text="Y:" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <Button fx:id="importButton" mnemonicParsing="false" text="Import" GridPane.rowIndex="1" />
+                  <Button fx:id="saveButton" mnemonicParsing="false" text="Save" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                </children>
             </GridPane>
          </children></AnchorPane>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
          <children>
-            <ImageView fx:id="imageView" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="imageView" fitHeight="400.0" fitWidth="514.0" pickOnBounds="true" preserveRatio="true" />
          </children></AnchorPane>
   </items>
 </SplitPane>

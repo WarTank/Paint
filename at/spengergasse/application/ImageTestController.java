@@ -17,7 +17,10 @@ public class ImageTestController {
     public Label xPos;
 
     @FXML
-    public Button button;
+    public Button importButton;
+
+    @FXML
+    public Button saveButton;
 
 
     public double test(){

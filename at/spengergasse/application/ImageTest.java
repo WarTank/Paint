@@ -17,11 +17,11 @@ import spengergasse.model.MousePositionThread;
 
 import java.io.File;
 
-/**
- * Created by HER17491 on 10.03.2017.
- */
+
 public class ImageTest extends Application {
-    int mousePosX,mousePosY;
+    private int mousePosX;
+    private int mousePosY;
+
     ImageTestController itc;
 
     public ImageTestController getItc() {
@@ -57,39 +57,21 @@ public class ImageTest extends Application {
             mptt.start();
 
 
-            itc.button.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(final ActionEvent event) {
-                    FileChooser fileChooser = new FileChooser();
-                    File file = fileChooser.showOpenDialog(primaryStage);
-                    if(file != null){
-                        itc.imageView.setImage(new Image(file.toURI().toString()));
-                    }
+            itc.importButton.setOnAction(event -> {
+                FileChooser fileChooser = new FileChooser();
+                File file = fileChooser.showOpenDialog(primaryStage);
+                if(file != null){
+                    itc.imageView.setImage(new Image(file.toURI().toString()));
                 }
             });
 
+
+
             Scene scene = new Scene(root,1280,720);
             scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
-            Image image = new Image("http://docs.oracle.com/javafx/"
-                    + "javafx/images/javafx-documentation.png");
+            Image image = new Image("https://static-whitecastle-com.s3.amazonaws.com/spacer.gif");
+
             itc.imageView.setImage(image);
-
-            PixelReader pixelReader = image.getPixelReader();
-
-            WritableImage wImage = new WritableImage(
-                    (int)image.getWidth(),
-                    (int)image.getHeight());
-            PixelWriter pixelWriter = wImage.getPixelWriter();
-
-            for(int readY=0;readY<image.getHeight();readY++){
-                for(int readX=0; readX<image.getWidth();readX++){
-                    Color color = pixelReader.getColor(readX,readY);
-
-                    pixelWriter.setColor(readX,readY,color);
-                }
-            }
-
-            itc.imageView.setImage(wImage);
             primaryStage.setTitle("Image Write Test");
             primaryStage.setScene(scene);
             primaryStage.show();
