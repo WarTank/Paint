@@ -14,6 +14,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import org.omg.CORBA.Any;
 import spengergasse.model.MousePositionThread;
 
 import java.io.File;
@@ -61,13 +62,26 @@ public class ImageTest extends Application {
                 @Override
                 public void handle(MouseEvent event) {
                     if(event.getEventType() == MouseEvent.MOUSE_MOVED){
-                        double splitDeviderWidth= itc.splitPane.getWidth() * itc.splitPane.getDividerPositions()[0];
-                        mousePosX = (int)(event.getSceneX() - splitDeviderWidth);
+                        double splitDividerWidth= itc.splitPane.getWidth() * itc.splitPane.getDividerPositions()[0];
+                        mousePosX = (int)(event.getSceneX() - splitDividerWidth);
                         mousePosY = (int)event.getSceneY();
-                        System.out.println("x" + mousePosX + "\ty" + mousePosY);
+                        System.out.println("x:" + mousePosX + "y:" +mousePosY);
                     }
                 }
             });
+
+            itc.splitPane.setOnMouseDragged(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    if(event.getEventType() == MouseEvent.MOUSE_DRAGGED){
+                        double splitDividerWidth= itc.splitPane.getWidth() * itc.splitPane.getDividerPositions()[0];
+                        mousePosX = (int)(event.getSceneX() - splitDividerWidth);
+                        mousePosY = (int)event.getSceneY();
+                        System.out.println("x:" + mousePosX + "y:" +mousePosY);
+                    }
+                }
+            });
+
 
             itc.importButton.setOnAction(event -> {
                 FileChooser fileChooser = new FileChooser();
