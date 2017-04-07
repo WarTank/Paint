@@ -22,17 +22,22 @@ public class MousePositionThread implements Runnable {
 
     private int x, y;
 
+    private int scaledX, scaledY;
+
     public MousePositionThread(ImageTest imageTest) {
         this.imageTest = imageTest;
     }
+
+    private int brushSize;
 
     @Override
     public void run() {
         itc = imageTest.getItc();
 
 
-
         while (true) {
+            brushSize = itc.brushSizeTF.getText().isEmpty() ? 3 : Integer.parseInt(itc.brushSizeTF.getText());
+
             try {
                 Thread.sleep(20);
             } catch (InterruptedException e) {
@@ -67,8 +72,16 @@ public class MousePositionThread implements Runnable {
 
                 pixelWriter = wImage.getPixelWriter();
 
-                if ((x >= 0 && x < imageX) && (y >= 0 && y < imageY)) {
-                    pixelWriter.setColor(x, y, itc.colorPicker.getValue());
+                scaledX = (int) (x / itc.getScaleXRatio());
+                scaledY = (int) (y / itc.getScaleYRatio());
+
+                if ((scaledX >= 0 && x < imageX) && (scaledY >= 0 && y < imageY)) {
+                    for (int i = 0; i < brushSize; i++) {
+                        for (int j = 0; j < brushSize; j++) {
+
+                        }
+                    }
+                    pixelWriter.setColor(scaledX, scaledY, itc.colorPicker.getValue());
                 }
 
                 itc.imageView.setImage(wImage);
@@ -78,7 +91,7 @@ public class MousePositionThread implements Runnable {
         }
     }
 
-    public void UpdateMouseCoordinates(){
+    public void UpdateMouseCoordinates() {
 
     }
 }

@@ -1,10 +1,7 @@
 package spengergasse.application;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ColorPicker;
-import javafx.scene.control.Label;
-import javafx.scene.control.SplitPane;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 
 public class ImageTestController {
@@ -12,12 +9,12 @@ public class ImageTestController {
     @FXML
     public ImageView imageView;
 
-    double getScaleXRatio()
+    public double getScaleXRatio()
     {
         return imageView.getBoundsInParent().getWidth()/imageView.getImage().getWidth();
     }
 
-    double getScaleYRatio()
+    public double getScaleYRatio()
     {
         return imageView.getBoundsInParent().getHeight()/imageView.getImage().getHeight();
     }
@@ -39,6 +36,13 @@ public class ImageTestController {
 
     @FXML
     public ColorPicker colorPicker;
+
+    @FXML
+    public TextField brushSizeTF;
+
+
+
+
 
 
 
