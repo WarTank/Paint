@@ -39,17 +39,20 @@ public class MousePositionThread implements Runnable {
                 e.printStackTrace();
             }
 
-            pointerInfo = MouseInfo.getPointerInfo();
+            x = imageTest.getMousePosX();
+            y = imageTest.getMousePosY();
+
+            /*pointerInfo = MouseInfo.getPointerInfo();
             x = pointerInfo.getLocation().x;
             y = pointerInfo.getLocation().y;
 
             imageTest.setMousePosX(x);
-            imageTest.setMousePosY(y);
+            imageTest.setMousePosY(y);*/
 
             //Main Thread Code
             Platform.runLater(() -> {
-                itc.xPos.setText("X:" + pointerInfo.getLocation().x);
-                itc.yPos.setText("Y:" + pointerInfo.getLocation().y);
+                itc.xPos.setText("X:" + x);
+                itc.yPos.setText("Y:" + y);
                 //Very bad performance
 
                 image = itc.imageView.getImage();

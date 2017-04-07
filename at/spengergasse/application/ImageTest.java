@@ -10,6 +10,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.PixelReader;
 import javafx.scene.image.PixelWriter;
 import javafx.scene.image.WritableImage;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -56,6 +57,17 @@ public class ImageTest extends Application {
             Thread mptt = new Thread(mpt);
             mptt.start();
 
+            itc.splitPane.setOnMouseMoved(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    if(event.getEventType() == MouseEvent.MOUSE_MOVED){
+                        double splitDeviderWidth= itc.splitPane.getWidth() * itc.splitPane.getDividerPositions()[0];
+                        mousePosX = (int)(event.getSceneX() - splitDeviderWidth);
+                        mousePosY = (int)event.getSceneY();
+                        System.out.println("x" + mousePosX + "\ty" + mousePosY);
+                    }
+                }
+            });
 
             itc.importButton.setOnAction(event -> {
                 FileChooser fileChooser = new FileChooser();
