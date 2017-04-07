@@ -57,6 +57,14 @@ public class ImageTest extends Application {
             Thread mptt = new Thread(mpt);
             mptt.start();
 
+
+            //ensure only numbers are entered in textField
+            itc.brushSizeTF.textProperty().addListener((observable, oldValue, newValue) -> {
+                if (!newValue.matches("\\d*")) {
+                    itc.brushSizeTF.setText(newValue.replaceAll("[^\\d]", ""));
+                }
+            });
+
             itc.splitPane.setOnMouseMoved(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent event) {
@@ -64,7 +72,6 @@ public class ImageTest extends Application {
                         double splitDeviderWidth= itc.splitPane.getWidth() * itc.splitPane.getDividerPositions()[0];
                         mousePosX = (int)(event.getSceneX() - splitDeviderWidth);
                         mousePosY = (int)event.getSceneY();
-                        System.out.println("x" + mousePosX + "\ty" + mousePosY);
                     }
                 }
             });
