@@ -3,6 +3,7 @@ package spengergasse.application;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.SplitPane;
 import javafx.scene.image.ImageView;
 
 public class ImageTestController {
@@ -21,6 +22,9 @@ public class ImageTestController {
 
     @FXML
     public Button saveButton;
+
+    @FXML
+    public SplitPane splitPane;
 
 
     public double test(){
