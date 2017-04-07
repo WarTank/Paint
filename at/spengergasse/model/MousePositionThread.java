@@ -68,7 +68,7 @@ public class MousePositionThread implements Runnable {
                 pixelWriter = wImage.getPixelWriter();
 
                 if ((x >= 0 && x < imageX) && (y >= 0 && y < imageY)) {
-                    pixelWriter.setColor(x, y, Color.BLACK);
+                    pixelWriter.setColor(x, y, itc.colorPicker.getValue());
                 }
 
                 itc.imageView.setImage(wImage);
