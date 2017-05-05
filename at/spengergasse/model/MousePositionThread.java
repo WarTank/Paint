@@ -2,10 +2,12 @@ package spengergasse.model;
 
 import com.sun.javafx.geom.Vec2d;
 import javafx.application.Platform;
+import javafx.beans.property.DoubleProperty;
 import javafx.scene.image.*;
 import javafx.scene.image.Image;
 import spengergasse.application.ImageTest;
 import spengergasse.application.ImageTestController;
+
 
 import java.awt.*;
 
@@ -32,7 +34,6 @@ public class MousePositionThread implements Runnable {
     @Override
     public void run() {
         itc = imageTest.getItc();
-
 
         while (true) {
             brushSize = itc.brushSizeTF.getText().isEmpty() ? 1 : Integer.parseInt(itc.brushSizeTF.getText());

@@ -1,6 +1,11 @@
 package spengergasse.application;
 
 import javafx.application.Application;
+//TODO
+import javafx.beans.InvalidationListener;
+import javafx.beans.Observable;
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -10,7 +15,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.PixelReader;
 import javafx.scene.image.PixelWriter;
 import javafx.scene.image.WritableImage;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.input.ScrollEvent;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -22,6 +29,9 @@ import java.io.File;
 public class ImageTest extends Application {
     private int mousePosX;
     private int mousePosY;
+
+    //TODO
+    private final DoubleProperty zoomProperty = new SimpleDoubleProperty(200);
 
     ImageTestController itc;
 
@@ -84,11 +94,28 @@ public class ImageTest extends Application {
                 }
             });
 
+            zoomProperty.addListener(new InvalidationListener() {
+                @Override
+                public void invalidated(Observable arg0) {
+                    itc.imageView.setFitWidth(zoomProperty.get() * 4);
+                    itc.imageView.setFitHeight(zoomProperty.get() * 3);
+                }
+            });
 
+            itc.splitPane.addEventFilter(ScrollEvent.ANY, new EventHandler<ScrollEvent>() {
+                public void handle(ScrollEvent event){
+                    if (event.getDeltaY() > 0 && event.isControlDown()) {
+                        zoomProperty.set(zoomProperty.get() * 1.1);
+                    } else if (event.getDeltaY() < 0 && event.isControlDown()) {
+                        zoomProperty.set(zoomProperty.get() / 1.1);
+                    }
+                }
+            });
 
             Scene scene = new Scene(root,1280,720);
             scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
             Image image = new Image("https://static-whitecastle-com.s3.amazonaws.com/spacer.gif");
+            itc.imageView.preserveRatioProperty().set(true);
 
             itc.imageView.setImage(image);
             primaryStage.setTitle("Image Write Test");
