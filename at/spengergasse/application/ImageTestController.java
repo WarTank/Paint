@@ -9,14 +9,12 @@ public class ImageTestController {
     @FXML
     public ImageView imageView;
 
-    public double getScaleXRatio()
-    {
-        return imageView.getBoundsInParent().getWidth()/imageView.getImage().getWidth();
+    public double getScaleXRatio() {
+        return imageView.getBoundsInParent().getWidth() / imageView.getImage().getWidth();
     }
 
-    public double getScaleYRatio()
-    {
-        return imageView.getBoundsInParent().getHeight()/imageView.getImage().getHeight();
+    public double getScaleYRatio() {
+        return imageView.getBoundsInParent().getHeight() / imageView.getImage().getHeight();
     }
 
     @FXML
@@ -41,12 +39,7 @@ public class ImageTestController {
     public TextField brushSizeTF;
 
 
-
-
-
-
-
-    public double test(){
+    public double test() {
         return imageView.getFitWidth();
     }
 
