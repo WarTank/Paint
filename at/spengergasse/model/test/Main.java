@@ -24,6 +24,7 @@ import javafx.stage.Stage;
 
 import java.awt.*;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -54,15 +55,12 @@ public class Main extends Application {
                 }
             }
         });
-
-
-
-
-
-        Button secondButton = new Button("Save to");
-        HBox hBox = new HBox(imp, secondButton);
+        Button saveButton = new Button("Save to");
+        HBox hBox = new HBox(imp, saveButton);
         ToolBar toolbar = new ToolBar(hBox);
         borderPane.setTop(toolbar);
+
+
 
 
         Pane leftPane = new Pane();

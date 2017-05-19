@@ -1,29 +1,26 @@
 package spengergasse.application;
 
 import javafx.application.Application;
-//TODO
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
-import javafx.event.ActionEvent;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.PixelReader;
-import javafx.scene.image.PixelWriter;
 import javafx.scene.image.WritableImage;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
-import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import spengergasse.model.MousePositionThread;
 
-import java.io.File;
+import javax.imageio.ImageIO;
+import java.io.*;
 
 
 public class ImageTest extends Application {
@@ -83,11 +80,36 @@ public class ImageTest extends Application {
                         mousePosX = (int)(event.getSceneX() - splitDeviderWidth);
                         mousePosY = (int)event.getSceneY();
                     }
+
+
                 }
+            });
+
+            itc.saveButton.setOnAction(event -> {
+                FileChooser fileChooser = new FileChooser();
+                FileChooser.ExtensionFilter extensionFilter = new FileChooser.ExtensionFilter("Image Files", "*.jpg", "*.png");
+                fileChooser.getExtensionFilters().add(extensionFilter);
+
+                File file = fileChooser.showSaveDialog(primaryStage);
+
+                PixelReader pixelReader = itc.imageView.getImage().getPixelReader();
+                WritableImage wim = new WritableImage(pixelReader, (int) itc.imageView.getBoundsInLocal().getWidth(), (int) itc.imageView.getBoundsInLocal().getHeight());
+                try{
+                    ImageIO.write(SwingFXUtils.fromFXImage(wim, null), "jpg", file);
+                }catch (IOException e){
+                    e.printStackTrace();
+                }
+
+
+
+
+
             });
 
             itc.importButton.setOnAction(event -> {
                 FileChooser fileChooser = new FileChooser();
+                FileChooser.ExtensionFilter extensionFilter = new FileChooser.ExtensionFilter("Image Files", "*.jpg", "*.png");
+                fileChooser.getExtensionFilters().add(extensionFilter);
                 File file = fileChooser.showOpenDialog(primaryStage);
                 if(file != null){
                     itc.imageView.setImage(new Image(file.toURI().toString()));
@@ -121,16 +143,12 @@ public class ImageTest extends Application {
             primaryStage.setTitle("Image Write Test");
             primaryStage.setScene(scene);
             primaryStage.show();
-            changePixels();
 
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public void changePixels(){
-
-    }
 
     public static void main(String[] args) {
         launch(args);

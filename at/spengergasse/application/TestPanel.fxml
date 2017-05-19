@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<SplitPane fx:id="splitPane" dividerPositions="0.5" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="spengergasse.application.ImageTestController">
+<SplitPane fx:id="splitPane" dividerPositions="0.27591973244147155" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-1.0" minWidth="-1.0" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="spengergasse.application.ImageTestController">
   <items>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="398.0" prefWidth="115.0">
       <children>
@@ -42,7 +42,11 @@
     </AnchorPane>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
       <children>
-        <ImageView fx:id="imageView" fitHeight="400.0" fitWidth="512.0" pickOnBounds="true" preserveRatio="true" />
+        <ScrollPane id="ScrollPane" fitToHeight="false" fitToWidth="false" hbarPolicy="ALWAYS" maxHeight="-1.0" maxWidth="-1.0" minHeight="-Infinity" minWidth="-Infinity" pannable="true" prefHeight="398.0" prefViewportHeight="400.0" prefViewportWidth="512.0" prefWidth="432.0" vbarPolicy="ALWAYS" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="0.0">
+          <content>
+            <ImageView fx:id="imageView" fitHeight="337.0" fitWidth="431.359997483933" pickOnBounds="true" preserveRatio="true" />
+          </content>
+        </ScrollPane>
       </children>
     </AnchorPane>
   </items>
