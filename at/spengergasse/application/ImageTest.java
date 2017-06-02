@@ -20,6 +20,7 @@ import javafx.stage.Stage;
 import spengergasse.model.MousePositionThread;
 
 import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
 import java.io.*;
 import java.security.cert.Extension;
 
@@ -93,11 +94,10 @@ public class ImageTest extends Application {
 
 
                 File file = fileChooser.showSaveDialog(primaryStage);
-                PixelReader pixelReader = itc.imageView.getImage().getPixelReader();
-                WritableImage wim = new WritableImage(pixelReader, (int) itc.imageView.getBoundsInLocal().getWidth(), (int) itc.imageView.getBoundsInLocal().getHeight());
+                BufferedImage bif = SwingFXUtils.fromFXImage(itc.imageView.getImage(), null);
                 String extension = fileChooser.getSelectedExtensionFilter().getExtensions().get(0).substring(2);
                 try {
-                    ImageIO.write(SwingFXUtils.fromFXImage(wim, null), extension, file);
+                    ImageIO.write(bif, extension, file);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
