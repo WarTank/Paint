@@ -21,6 +21,7 @@ import spengergasse.model.MousePositionThread;
 
 import javax.imageio.ImageIO;
 import java.io.*;
+import java.security.cert.Extension;
 
 
 public class ImageTest extends Application {
@@ -88,12 +89,16 @@ public class ImageTest extends Application {
             itc.saveButton.setOnAction(event -> {
                 FileChooser fileChooser = new FileChooser();
                 FileChooser.ExtensionFilter extensionFilter = new FileChooser.ExtensionFilter("Image Files", "*.jpg", "*.png");
-                fileChooser.getExtensionFilters().add(extensionFilter);
+                FileChooser.ExtensionFilter extenstionFilterJpg = new FileChooser.ExtensionFilter("Jpg File", "*.jpg");
+                FileChooser.ExtensionFilter extenstionFilterPng = new FileChooser.ExtensionFilter("Png File", "*.png");
+                fileChooser.getExtensionFilters().addAll(extensionFilter, extenstionFilterJpg, extenstionFilterPng);
+
 
                 File file = fileChooser.showSaveDialog(primaryStage);
 
                 PixelReader pixelReader = itc.imageView.getImage().getPixelReader();
                 WritableImage wim = new WritableImage(pixelReader, (int) itc.imageView.getBoundsInLocal().getWidth(), (int) itc.imageView.getBoundsInLocal().getHeight());
+
                 try{
                     ImageIO.write(SwingFXUtils.fromFXImage(wim, null), "jpg", file);
                 }catch (IOException e){
