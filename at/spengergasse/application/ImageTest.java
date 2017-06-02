@@ -76,10 +76,10 @@ public class ImageTest extends Application {
             itc.splitPane.setOnMouseMoved(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent event) {
-                    if(event.getEventType() == MouseEvent.MOUSE_MOVED){
-                        double splitDeviderWidth= itc.splitPane.getWidth() * itc.splitPane.getDividerPositions()[0];
-                        mousePosX = (int)(event.getSceneX() - splitDeviderWidth);
-                        mousePosY = (int)event.getSceneY();
+                    if (event.getEventType() == MouseEvent.MOUSE_MOVED) {
+                        double splitDeviderWidth = itc.splitPane.getWidth() * itc.splitPane.getDividerPositions()[0];
+                        mousePosX = (int) (event.getSceneX() - splitDeviderWidth);
+                        mousePosY = (int) event.getSceneY();
                     }
 
 
@@ -88,27 +88,20 @@ public class ImageTest extends Application {
 
             itc.saveButton.setOnAction(event -> {
                 FileChooser fileChooser = new FileChooser();
-                FileChooser.ExtensionFilter extensionFilter = new FileChooser.ExtensionFilter("Image Files", "*.jpg", "*.png");
-                FileChooser.ExtensionFilter extenstionFilterJpg = new FileChooser.ExtensionFilter("Jpg File", "*.jpg");
                 FileChooser.ExtensionFilter extenstionFilterPng = new FileChooser.ExtensionFilter("Png File", "*.png");
-                fileChooser.getExtensionFilters().addAll(extensionFilter, extenstionFilterJpg, extenstionFilterPng);
+                fileChooser.getExtensionFilters().add(extenstionFilterPng);
 
 
                 File file = fileChooser.showSaveDialog(primaryStage);
 
                 PixelReader pixelReader = itc.imageView.getImage().getPixelReader();
                 WritableImage wim = new WritableImage(pixelReader, (int) itc.imageView.getBoundsInLocal().getWidth(), (int) itc.imageView.getBoundsInLocal().getHeight());
-
-                try{
-                    ImageIO.write(SwingFXUtils.fromFXImage(wim, null), "jpg", file);
-                }catch (IOException e){
+                String extension = fileChooser.getSelectedExtensionFilter().getExtensions().get(0).substring(2);
+                try {
+                    ImageIO.write(SwingFXUtils.fromFXImage(wim, null), extension, file);
+                } catch (IOException e) {
                     e.printStackTrace();
                 }
-
-
-
-
-
             });
 
             itc.importButton.setOnAction(event -> {
@@ -116,7 +109,7 @@ public class ImageTest extends Application {
                 FileChooser.ExtensionFilter extensionFilter = new FileChooser.ExtensionFilter("Image Files", "*.jpg", "*.png");
                 fileChooser.getExtensionFilters().add(extensionFilter);
                 File file = fileChooser.showOpenDialog(primaryStage);
-                if(file != null){
+                if (file != null) {
                     itc.imageView.setImage(new Image(file.toURI().toString()));
                 }
             });
@@ -130,7 +123,7 @@ public class ImageTest extends Application {
             });
 
             itc.splitPane.addEventFilter(ScrollEvent.ANY, new EventHandler<ScrollEvent>() {
-                public void handle(ScrollEvent event){
+                public void handle(ScrollEvent event) {
                     if (event.getDeltaY() > 0 && event.isControlDown()) {
                         zoomProperty.set(zoomProperty.get() * 1.1);
                     } else if (event.getDeltaY() < 0 && event.isControlDown()) {
@@ -139,7 +132,7 @@ public class ImageTest extends Application {
                 }
             });
 
-            Scene scene = new Scene(root,1280,720);
+            Scene scene = new Scene(root, 1280, 720);
             scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
             Image image = new Image("https://static-whitecastle-com.s3.amazonaws.com/spacer.gif");
             itc.imageView.preserveRatioProperty().set(true);
