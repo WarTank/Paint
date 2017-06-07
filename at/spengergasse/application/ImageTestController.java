@@ -30,6 +30,9 @@ public class ImageTestController {
     public Button saveButton;
 
     @FXML
+    public Button clearButton;
+
+    @FXML
     public SplitPane splitPane;
 
     @FXML
@@ -37,6 +40,9 @@ public class ImageTestController {
 
     @FXML
     public TextField brushSizeTF;
+
+    @FXML
+    public ScrollPane scrollPane;
 
 
     public double test() {

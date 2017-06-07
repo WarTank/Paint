@@ -74,23 +74,28 @@ public class ImageTest extends Application {
                 }
             });
 
-            itc.splitPane.setOnMouseMoved(new EventHandler<MouseEvent>() {
+            itc.splitPane.setOnMouseDragged(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent event) {
-                    if (event.getEventType() == MouseEvent.MOUSE_MOVED) {
+                    if (event.isPrimaryButtonDown()) {
+                        System.out.println("Dragged");
                         double splitDeviderWidth = itc.splitPane.getWidth() * itc.splitPane.getDividerPositions()[0];
                         mousePosX = (int) (event.getSceneX() - splitDeviderWidth);
                         mousePosY = (int) event.getSceneY();
                     }
-
-
                 }
             });
+
+            /*double splitDeviderWidth = itc.splitPane.getWidth() * itc.splitPane.getDividerPositions()[0];
+            mousePosX = (int) (event.getSceneX() - splitDeviderWidth);
+            mousePosY = (int) event.getSceneY();*/
+
 
             itc.saveButton.setOnAction(event -> {
                 FileChooser fileChooser = new FileChooser();
                 FileChooser.ExtensionFilter extenstionFilterPng = new FileChooser.ExtensionFilter("Png File", "*.png");
-                fileChooser.getExtensionFilters().add(extenstionFilterPng);
+                FileChooser.ExtensionFilter extenstionFilterJpg = new FileChooser.ExtensionFilter("Jpg File (Not working properly)", "*.jpg");
+                fileChooser.getExtensionFilters().addAll(extenstionFilterPng, extenstionFilterJpg);
 
 
                 File file = fileChooser.showSaveDialog(primaryStage);
@@ -109,7 +114,8 @@ public class ImageTest extends Application {
                 fileChooser.getExtensionFilters().add(extensionFilter);
                 File file = fileChooser.showOpenDialog(primaryStage);
                 if (file != null) {
-                    itc.imageView.setImage(new Image(file.toURI().toString()));
+                    Image scaleImage = new Image(file.toURI().toString());
+                    itc.imageView.setImage(scaleImage);
                 }
             });
 
