@@ -66,6 +66,7 @@ public class ImageTest extends Application {
             FXMLLoader loader = new FXMLLoader(ImageTestController.class.getResource("TestPanel.fxml"));
             Parent root = loader.load();
             itc = loader.getController();
+            root.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 
             MousePositionThread mpt = new MousePositionThread(this);
             Thread mptt = new Thread(mpt);

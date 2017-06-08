@@ -1,19 +1,14 @@
 /* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
-#splitPane{
-	
+.scroll-pane > .viewport{
+	-fx-background-color: transparent;
 }
 
-#toolPanel{
-	-fx-min-width: 200px ;
-	-fx-background-color: rgb(170,170,170);
+.scroll-pane{
+	-fx-background-color: grey;
 }
 
-#canvasPanel{
-	-fx-background-color: white ;
-	-fx-min-width: 600px ;
-}
-
-#optionsPanel{
-	-fx-background-color: rgb(170,170,170);
-	-fx-min-width: 200px ;
+#imageView{
+	-fx-border-color: pink;
+	-fx-border-width: 3;
+    -fx-padding: 15;
 }
