@@ -10,6 +10,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
 import javafx.scene.image.PixelReader;
 import javafx.scene.image.WritableImage;
@@ -96,12 +97,14 @@ public class ImageTest extends Application {
 
 
                 File file = fileChooser.showSaveDialog(primaryStage);
-                BufferedImage bif = SwingFXUtils.fromFXImage(itc.imageView.getImage(), null);
-                String extension = fileChooser.getSelectedExtensionFilter().getExtensions().get(0).substring(2);
-                try {
-                    ImageIO.write(bif, extension, file);
-                } catch (IOException e) {
-                    e.printStackTrace();
+                if(file != null){
+                    BufferedImage bif = SwingFXUtils.fromFXImage(itc.imageView.getImage(), null);
+                    String extension = fileChooser.getSelectedExtensionFilter().getExtensions().get(0).substring(2);
+                    try {
+                        ImageIO.write(bif, extension, file);
+                    } catch (IOException | NullPointerException e) {
+                        e.printStackTrace();
+                    }
                 }
             });
 
