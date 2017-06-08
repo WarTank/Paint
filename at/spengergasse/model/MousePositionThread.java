@@ -28,6 +28,8 @@ public class MousePositionThread implements Runnable {
 
     private Vec2d prevCoords;
 
+    private boolean mousePressedLastFrame;
+
     @Override
     public void run() {
         itc = imageTest.getItc();
@@ -68,21 +70,24 @@ public class MousePositionThread implements Runnable {
                 Vec2d currPos = new Vec2d(scaledX, scaledY);
 
                 if (isWithinNumbers(scaledX, 0, imageX) && isWithinNumbers(scaledY, 0, imageY)) {
-                    if (brushSize == 1) {
-                        placeColorFromPicker(scaledX, scaledY, pixelWriter);
-                    } else {
-                        //Loop through pixel square with cursor position as center
-                        if (prevCoords != null) {
-                            int amountOfPoints = (int) (getLengthOfVector(getVectorBetweenTwoPos(prevCoords, currPos)) / ((float)brushSize / 8));
+
+                    if (prevCoords != null) {
+                        if (mousePressedLastFrame) {
+                            int amountOfPoints = (int) (getLengthOfVector(getVectorBetweenTwoPos(prevCoords, currPos)) / ((float) brushSize / 8));
                             for (int i = 0; i < amountOfPoints; i++) {
                                 Vec2d point = getPointBetweenVectors(prevCoords, currPos, 1f / amountOfPoints * i);
                                 placeCircleAtCoordinates((int) point.x, (int) point.y, brushSize, imageX, imageY);
                             }
+                        } else {
+                            placeCircleAtCoordinates(scaledX, scaledY, brushSize, imageX, imageY);
                         }
                     }
                 }
 
+
                 itc.imageView.setImage(wImage);
+                mousePressedLastFrame = imageTest.isMousePressed();
+
                 prevCoords = new Vec2d(scaledX, scaledY);
             });
         }
@@ -104,6 +109,19 @@ public class MousePositionThread implements Runnable {
 
     private void placeCircleAtCoordinates(int x, int y, int size, int imageWidth, int imageHeight) {
         int halfBrushSize = size / 2;
+
+        if (brushSize == 1) {
+            int currentlyPlacingX, currentlyPlacingY;
+            currentlyPlacingX = x;
+            currentlyPlacingY = y;
+
+            if ((isWithinNumbers(currentlyPlacingX, 0, imageWidth) && isWithinNumbers(currentlyPlacingY, 0, imageHeight))) {
+                placeColorFromPicker(currentlyPlacingX, currentlyPlacingY, pixelWriter);
+            }
+
+            return;
+        }
+
 
         for (int i = -halfBrushSize; i < size - halfBrushSize; i++) {
             for (int j = -halfBrushSize; j < size - halfBrushSize; j++) {

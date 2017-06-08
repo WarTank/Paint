@@ -12,9 +12,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
-import javafx.scene.image.PixelReader;
 import javafx.scene.image.WritableImage;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
@@ -25,12 +23,12 @@ import spengergasse.model.MousePositionThread;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.*;
-import java.security.cert.Extension;
 
 
 public class ImageTest extends Application {
     private int mousePosX;
     private int mousePosY;
+    private boolean mousePressed;
 
     //TODO
     private final DoubleProperty zoomProperty = new SimpleDoubleProperty(200);
@@ -43,6 +41,10 @@ public class ImageTest extends Application {
 
     public int getMousePosX() {
         return mousePosX;
+    }
+
+    public boolean isMousePressed(){
+        return mousePressed;
     }
 
     public void setMousePosX(int mousePosX) {
@@ -77,12 +79,18 @@ public class ImageTest extends Application {
                 }
             });
 
-            itc.imageView.setOnMouseDragged(new EventHandler<MouseEvent>() {
+            itc.imageView.addEventHandler(MouseEvent.ANY, new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent event) {
-                    if (event.isPrimaryButtonDown()) {
+                    if(event.getEventType() == MouseEvent.MOUSE_CLICKED){
                         mousePosX = (int) event.getX();
                         mousePosY = (int) event.getY();
+                    }else if(event.isPrimaryButtonDown()){
+                        mousePosX = (int) event.getX();
+                        mousePosY = (int) event.getY();
+                        mousePressed = true;
+                    }else {
+                        mousePressed = false;
                     }
                 }
             });
