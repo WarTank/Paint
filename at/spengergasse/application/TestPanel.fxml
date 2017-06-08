@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
 <?import javafx.scene.control.ColorPicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
@@ -18,8 +14,9 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
 
-<BorderPane prefHeight="527.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="spengergasse.application.ImageTestController">
+<BorderPane prefHeight="527.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="spengergasse.application.ImageTestController">
    <center>
       <SplitPane fx:id="splitPane" dividerPositions="0.27591973244147155" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-1.0" minWidth="-1.0" prefHeight="100000.0" prefWidth="100000.0">
         <items>
@@ -45,9 +42,13 @@
           </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
             <children>
-              <ScrollPane fx:id="scrollPane" fitToHeight="false" fitToWidth="false" maxHeight="-1.0" maxWidth="-1.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="398.0" prefViewportHeight="400.0" prefViewportWidth="512.0" prefWidth="432.0" vbarPolicy="ALWAYS" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="0.0">
+              <ScrollPane fx:id="scrollPane" fitToHeight="true" fitToWidth="true" maxHeight="-1.0" maxWidth="-1.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="398.0" prefViewportHeight="400.0" prefViewportWidth="512.0" prefWidth="432.0" vbarPolicy="ALWAYS" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="0.0">
                 <content>
-                  <ImageView fx:id="imageView" fitHeight="337.0" fitWidth="431.359997483933" pickOnBounds="true" preserveRatio="true" />
+                        <StackPane>
+                           <children>
+                        <ImageView fx:id="imageView" fitHeight="337.0" fitWidth="431.359997483933" pickOnBounds="true" preserveRatio="true" />
+                           </children>
+                        </StackPane>
                 </content>
               </ScrollPane>
             </children>
