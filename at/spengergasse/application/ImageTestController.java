@@ -47,6 +47,9 @@ public class ImageTestController {
     @FXML
     public ScrollPane scrollPane;
 
+    @FXML
+    public MenuItem closeButton;
+
 
 
 

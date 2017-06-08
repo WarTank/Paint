@@ -19,9 +19,9 @@
    </rowConstraints>
    <children>
       <TextField GridPane.columnIndex="1" fx:id="xResTF" />
-      <Label text="X Resolution" />
+      <Label text=" X Resolution" />
       <TextField fx:id="yResTF" layoutX="110.0" layoutY="13.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-      <Label layoutX="10.0" layoutY="17.0" text="Y Resolution" GridPane.rowIndex="1" />
+      <Label layoutX="10.0" layoutY="17.0" text=" Y Resolution" GridPane.rowIndex="1" />
       <Button fx:id="doneButton" mnemonicParsing="false" text="Done" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
    </children>
 </GridPane>
