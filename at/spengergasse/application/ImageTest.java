@@ -14,6 +14,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.WritableImage;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 import javafx.stage.FileChooser;
@@ -95,7 +96,6 @@ public class ImageTest extends Application {
                 }
             });
 
-
             itc.saveButton.setOnAction(event -> {
                 FileChooser fileChooser = new FileChooser();
                 FileChooser.ExtensionFilter extenstionFilterPng = new FileChooser.ExtensionFilter("Png File", "*.png");
@@ -115,12 +115,11 @@ public class ImageTest extends Application {
                 }
             });
 
-
             itc.newButton.setOnAction(event -> {
                 try {
                     FXMLLoader fxmlLoader = new FXMLLoader();
                     fxmlLoader.setLocation(getClass().getResource("ResolutionPopup.fxml"));
-                    Scene scene = new Scene(fxmlLoader.load(), 270, 70);
+                    Scene scene = new Scene(fxmlLoader.load(), 300, 110);
 
                     ResolutionPopupController rpc = fxmlLoader.getController();
 
@@ -150,6 +149,7 @@ public class ImageTest extends Application {
 
 
                     Stage stage = new Stage();
+                    stage.setResizable(false);
                     stage.setTitle("Set Resolution");
                     stage.setScene(scene);
                     stage.show();
@@ -173,6 +173,12 @@ public class ImageTest extends Application {
                 }
             });
 
+            itc.closeButton.setOnAction(event -> {
+                if(primaryStage.isShowing()){
+                    primaryStage.close();
+                }
+            });
+
             zoomProperty.addListener(new InvalidationListener() {
                 @Override
                 public void invalidated(Observable arg0) {
@@ -180,6 +186,7 @@ public class ImageTest extends Application {
                     itc.imageView.setFitHeight(zoomProperty.get() * 3);
                 }
             });
+
 
             itc.splitPane.addEventFilter(ScrollEvent.ANY, new EventHandler<ScrollEvent>() {
                 public void handle(ScrollEvent event) {

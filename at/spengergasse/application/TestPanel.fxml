@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.control.ColorPicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
@@ -15,7 +19,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<BorderPane prefHeight="527.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="spengergasse.application.ImageTestController">
+<BorderPane prefHeight="527.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="spengergasse.application.ImageTestController">
    <center>
       <SplitPane fx:id="splitPane" dividerPositions="0.27591973244147155" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-1.0" minWidth="-1.0" prefHeight="100000.0" prefWidth="100000.0">
         <items>
@@ -57,19 +61,15 @@
           <Menu mnemonicParsing="false" text="File">
             <items>
                   <MenuItem fx:id="newButton" mnemonicParsing="false" text="New" />
-              <MenuItem fx:id="importButton" mnemonicParsing="false" text="Import" />
+                  <MenuItem fx:id="importButton" mnemonicParsing="false" text="Import" />
                   <MenuItem fx:id="saveButton" mnemonicParsing="false" text="Save" />
+                  <MenuItem fx:id="closeButton" mnemonicParsing="false" text="Close" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Clear">
             <items>
             <MenuItem fx:id="clearButton" mnemonicParsing="false" text="Clear Cache" />
           </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Close">
-            <items>
-              <MenuItem mnemonicParsing="false" text="About" />
-            </items>
           </Menu>
         </menus>
       </MenuBar>
