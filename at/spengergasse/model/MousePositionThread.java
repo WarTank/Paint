@@ -2,14 +2,10 @@ package spengergasse.model;
 
 import com.sun.javafx.geom.Vec2d;
 import javafx.application.Platform;
-import javafx.beans.property.DoubleProperty;
 import javafx.scene.image.*;
 import javafx.scene.image.Image;
 import spengergasse.application.ImageTest;
 import spengergasse.application.ImageTestController;
-
-
-import java.awt.*;
 
 public class MousePositionThread implements Runnable {
 
@@ -18,7 +14,6 @@ public class MousePositionThread implements Runnable {
     private PixelReader pixelReader;
     private PixelWriter pixelWriter;
     private Image image;
-    private PointerInfo pointerInfo;
     private ImageTestController itc;
 
     private int x, y;

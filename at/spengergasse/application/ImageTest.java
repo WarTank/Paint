@@ -86,9 +86,6 @@ public class ImageTest extends Application {
                 }
             });
 
-            /*double splitDeviderWidth = itc.splitPane.getWidth() * itc.splitPane.getDividerPositions()[0];
-            mousePosX = (int) (event.getSceneX() - splitDeviderWidth);
-            mousePosY = (int) event.getSceneY();*/
 
 
             itc.saveButton.setOnAction(event -> {
@@ -139,6 +136,13 @@ public class ImageTest extends Application {
 
             Scene scene = new Scene(root, 1280, 720);
             scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+
+
+
+            //TODO Make custom (empty) image with y height and x width
+
+
+
             Image image = new Image("https://static-whitecastle-com.s3.amazonaws.com/spacer.gif");
             itc.imageView.preserveRatioProperty().set(true);
 

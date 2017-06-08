@@ -24,13 +24,13 @@ public class ImageTestController {
     public Label xPos;
 
     @FXML
-    public Button importButton;
+    public MenuItem importButton;
 
     @FXML
-    public Button saveButton;
+    public MenuItem saveButton;
 
     @FXML
-    public Button clearButton;
+    public MenuItem clearButton;
 
     @FXML
     public SplitPane splitPane;
