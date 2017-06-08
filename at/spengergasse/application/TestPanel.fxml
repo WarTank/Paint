@@ -22,22 +22,24 @@
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="398.0" prefWidth="115.0">
             <children>
-              <ColorPicker fx:id="colorPicker" layoutX="14.0" layoutY="168.0" />
-              <TextField fx:id="brushSizeTF" layoutX="14.0" layoutY="199.0" prefHeight="31.0" prefWidth="44.0" text="1" />
-                  <AnchorPane layoutY="248.0" prefHeight="13.0" prefWidth="15.0" />
-              <GridPane layoutY="32.0" prefHeight="32.0" prefWidth="161.0">
-                <children>
-                  <Label text=" X:" fx:id="xPos" />
-                  <Label fx:id="yPos" text=" Y:" GridPane.columnIndex="1" />
-                </children>
-                <columnConstraints>
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                </columnConstraints>
-                <rowConstraints>
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                </rowConstraints>
-              </GridPane>
+              <ColorPicker fx:id="colorPicker" layoutX="28.0" layoutY="46.0" prefHeight="31.0" prefWidth="166.0" />
+              <TextField fx:id="brushSizeTF" layoutX="28.0" layoutY="88.0" prefHeight="31.0" prefWidth="44.0" text="1" />
+                  <AnchorPane layoutX="28.0" layoutY="14.0" prefHeight="13.0" prefWidth="15.0">
+                     <children>
+                    <GridPane prefHeight="32.0" prefWidth="161.0">
+                      <children>
+                        <Label text=" X:" fx:id="xPos" />
+                        <Label fx:id="yPos" text=" Y:" GridPane.columnIndex="1" />
+                      </children>
+                      <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      </columnConstraints>
+                      <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      </rowConstraints>
+                    </GridPane>
+                     </children></AnchorPane>
             </children>
           </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
