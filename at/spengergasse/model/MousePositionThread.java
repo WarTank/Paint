@@ -42,7 +42,7 @@ public class MousePositionThread implements Runnable {
             x = imageTest.getMousePosX();
             y = imageTest.getMousePosY();
 
-            //Main Thread Code
+            //ResolutionPopup Thread Code
             Platform.runLater(() -> {
                 itc.xPos.setText("X:" + x);
                 itc.yPos.setText("Y:" + y);

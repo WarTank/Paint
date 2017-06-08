@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<BorderPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="spengergasse.application.ImageTestController">
+<BorderPane prefHeight="527.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="spengergasse.application.ImageTestController">
    <center>
       <SplitPane fx:id="splitPane" dividerPositions="0.27591973244147155" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-1.0" minWidth="-1.0" prefHeight="100000.0" prefWidth="100000.0">
         <items>
@@ -56,6 +56,7 @@
         <menus>
           <Menu mnemonicParsing="false" text="File">
             <items>
+                  <MenuItem fx:id="newButton" mnemonicParsing="false" text="New" />
               <MenuItem fx:id="importButton" mnemonicParsing="false" text="Import" />
                   <MenuItem fx:id="saveButton" mnemonicParsing="false" text="Save" />
             </items>

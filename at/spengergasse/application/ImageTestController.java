@@ -24,6 +24,9 @@ public class ImageTestController {
     public Label xPos;
 
     @FXML
+    public MenuItem newButton;
+
+    @FXML
     public MenuItem importButton;
 
     @FXML
@@ -43,6 +46,8 @@ public class ImageTestController {
 
     @FXML
     public ScrollPane scrollPane;
+
+
 
 
     public double test() {

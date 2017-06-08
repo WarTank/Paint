@@ -5,6 +5,8 @@ import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -87,7 +89,6 @@ public class ImageTest extends Application {
             });
 
 
-
             itc.saveButton.setOnAction(event -> {
                 FileChooser fileChooser = new FileChooser();
                 FileChooser.ExtensionFilter extenstionFilterPng = new FileChooser.ExtensionFilter("Png File", "*.png");
@@ -105,11 +106,58 @@ public class ImageTest extends Application {
                 }
             });
 
+
+            itc.newButton.setOnAction(event -> {
+                try {
+                    FXMLLoader fxmlLoader = new FXMLLoader();
+                    fxmlLoader.setLocation(getClass().getResource("ResolutionPopup.fxml"));
+                    Scene scene = new Scene(fxmlLoader.load(), 270, 70);
+
+                    ResolutionPopupController rpc = fxmlLoader.getController();
+
+                    rpc.xResTF.textProperty().addListener(new ChangeListener<String>() {
+                        @Override
+                        public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                            if (!newValue.matches("\\d*")) {
+                                rpc.xResTF.setText(newValue.replaceAll("[^\\d]", ""));
+                            }
+                        }
+                    });
+
+                    rpc.yResTF.textProperty().addListener(new ChangeListener<String>() {
+                        @Override
+                        public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                            if (!newValue.matches("\\d*")) {
+                                rpc.yResTF.setText(newValue.replaceAll("[^\\d]", ""));
+                            }
+                        }
+                    });
+
+                    rpc.doneButton.setOnAction(event1 -> {
+                        WritableImage writableImage = new WritableImage(Integer.parseInt(rpc.xResTF.getText()), Integer.parseInt(rpc.yResTF.getText()));
+                        itc.imageView.setImage(writableImage);
+                        scene.getWindow().hide();
+                    });
+
+
+                    Stage stage = new Stage();
+                    stage.setTitle("Set Resolution");
+                    stage.setScene(scene);
+                    stage.show();
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+
+            });
+
             itc.importButton.setOnAction(event -> {
                 FileChooser fileChooser = new FileChooser();
                 FileChooser.ExtensionFilter extensionFilter = new FileChooser.ExtensionFilter("Image Files", "*.jpg", "*.png");
                 fileChooser.getExtensionFilters().add(extensionFilter);
                 File file = fileChooser.showOpenDialog(primaryStage);
+
                 if (file != null) {
                     Image scaleImage = new Image(file.toURI().toString());
                     itc.imageView.setImage(scaleImage);
@@ -138,9 +186,7 @@ public class ImageTest extends Application {
             scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 
 
-
             //TODO Make custom (empty) image with y height and x width
-
 
 
             Image image = new Image("https://static-whitecastle-com.s3.amazonaws.com/spacer.gif");
