@@ -77,7 +77,7 @@ public class ImageTest extends Application {
                 }
             });
 
-            itc.splitPane.setOnMouseDragged(new EventHandler<MouseEvent>() {
+            itc.imageView.setOnMouseDragged(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent event) {
                     if (event.isPrimaryButtonDown()) {
@@ -187,10 +187,6 @@ public class ImageTest extends Application {
 
             Scene scene = new Scene(root, 1280, 720);
             scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
-
-
-            //TODO Make custom (empty) image with y height and x width
-
 
             Image image = new Image("https://static-whitecastle-com.s3.amazonaws.com/spacer.gif");
             itc.imageView.preserveRatioProperty().set(true);

@@ -44,6 +44,8 @@ public class ImageTestController {
     @FXML
     public TextField brushSizeTF;
 
+    @FXML
+    public ScrollPane scrollPane;
 
 
 
