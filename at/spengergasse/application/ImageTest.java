@@ -194,7 +194,7 @@ public class ImageTest extends Application {
             });
 
 
-            itc.splitPane.addEventFilter(ScrollEvent.ANY, new EventHandler<ScrollEvent>() {
+            itc.scrollPane.addEventFilter(ScrollEvent.ANY, new EventHandler<ScrollEvent>() {
                 public void handle(ScrollEvent event) {
                     if (event.getDeltaY() > 0 && event.isControlDown()) {
                         zoomProperty.set(zoomProperty.get() * 1.1);

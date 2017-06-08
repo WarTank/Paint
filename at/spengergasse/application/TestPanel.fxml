@@ -6,7 +6,6 @@
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -17,47 +16,6 @@
 <?import javafx.scene.layout.StackPane?>
 
 <BorderPane prefHeight="527.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="spengergasse.application.ImageTestController">
-   <center>
-      <SplitPane fx:id="splitPane" dividerPositions="0.27591973244147155" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-1.0" minWidth="-1.0" prefHeight="100000.0" prefWidth="100000.0">
-        <items>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="398.0" prefWidth="115.0">
-            <children>
-              <ColorPicker fx:id="colorPicker" layoutX="28.0" layoutY="46.0" prefHeight="31.0" prefWidth="166.0" />
-              <TextField fx:id="brushSizeTF" layoutX="28.0" layoutY="88.0" prefHeight="31.0" prefWidth="44.0" text="1" />
-                  <AnchorPane layoutX="28.0" layoutY="14.0" prefHeight="13.0" prefWidth="15.0">
-                     <children>
-                    <GridPane prefHeight="32.0" prefWidth="161.0">
-                      <children>
-                        <Label text=" X:" fx:id="xPos" />
-                        <Label fx:id="yPos" text=" Y:" GridPane.columnIndex="1" />
-                      </children>
-                      <columnConstraints>
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                      </columnConstraints>
-                      <rowConstraints>
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                      </rowConstraints>
-                    </GridPane>
-                     </children></AnchorPane>
-            </children>
-          </AnchorPane>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
-            <children>
-              <ScrollPane fx:id="scrollPane" fitToHeight="true" fitToWidth="true" maxHeight="-1.0" maxWidth="-1.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="398.0" prefViewportHeight="400.0" prefViewportWidth="512.0" prefWidth="432.0" vbarPolicy="ALWAYS" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="0.0">
-                <content>
-                        <StackPane>
-                           <children>
-                        <ImageView fx:id="imageView" fitHeight="337.0" fitWidth="431.359997483933" pickOnBounds="true" preserveRatio="true" />
-                           </children>
-                        </StackPane>
-                </content>
-              </ScrollPane>
-            </children>
-          </AnchorPane>
-        </items>
-      </SplitPane>
-   </center>
    <top>
       <MenuBar BorderPane.alignment="CENTER">
         <menus>
@@ -77,4 +35,44 @@
         </menus>
       </MenuBar>
    </top>
+   <left>
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="502.0" prefWidth="210.0" BorderPane.alignment="CENTER">
+      <children>
+        <ColorPicker fx:id="colorPicker" layoutX="28.0" layoutY="46.0" prefHeight="31.0" prefWidth="166.0" />
+        <TextField fx:id="brushSizeTF" layoutX="28.0" layoutY="88.0" prefHeight="31.0" prefWidth="44.0" text="1" />
+            <AnchorPane layoutX="28.0" layoutY="14.0" prefHeight="13.0" prefWidth="15.0">
+               <children>
+              <GridPane prefHeight="32.0" prefWidth="161.0">
+                <children>
+                  <Label text=" X:" fx:id="xPos" />
+                  <Label fx:id="yPos" text=" Y:" GridPane.columnIndex="1" />
+                </children>
+                <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                </columnConstraints>
+                <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                </rowConstraints>
+              </GridPane>
+               </children>
+            </AnchorPane>
+      </children>
+    </AnchorPane>
+   </left>
+   <center>
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+      <children>
+        <ScrollPane fx:id="scrollPane" fitToHeight="true" fitToWidth="true" maxHeight="-1.0" maxWidth="-1.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="398.0" prefViewportHeight="400.0" prefViewportWidth="512.0" prefWidth="432.0" vbarPolicy="ALWAYS" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="0.0">
+          <content>
+                  <StackPane>
+                     <children>
+                  <ImageView fx:id="imageView" fitHeight="337.0" fitWidth="431.359997483933" pickOnBounds="true" preserveRatio="true" />
+                     </children>
+                  </StackPane>
+          </content>
+        </ScrollPane>
+      </children>
+    </AnchorPane>
+   </center>
 </BorderPane>

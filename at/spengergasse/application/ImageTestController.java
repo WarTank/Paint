@@ -35,8 +35,6 @@ public class ImageTestController {
     @FXML
     public MenuItem clearButton;
 
-    @FXML
-    public SplitPane splitPane;
 
     @FXML
     public ColorPicker colorPicker;
