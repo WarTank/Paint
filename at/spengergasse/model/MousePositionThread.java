@@ -69,7 +69,7 @@ public class MousePositionThread implements Runnable {
 
                 Vec2d currPos = new Vec2d(scaledX, scaledY);
 
-                if (isWithinNumbers(scaledX, 0, imageX) && isWithinNumbers(scaledY, 0, imageY)) {
+                if (isWithinNumbers(scaledX, 0, imageX) && isWithinNumbers(scaledY, 0, imageY) && imageTest.isMousePressed()) {
 
                     if (prevCoords != null) {
                         if (mousePressedLastFrame) {
