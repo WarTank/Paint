@@ -93,6 +93,7 @@ public class MousePositionThread implements Runnable {
         }
     }
 
+
     private Vec2d getPointBetweenVectors(Vec2d A, Vec2d B, float between) {
         Vec2d AB = getVectorBetweenTwoPos(A, B);
 

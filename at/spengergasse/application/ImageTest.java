@@ -44,7 +44,7 @@ public class ImageTest extends Application {
         return mousePosX;
     }
 
-    public boolean isMousePressed(){
+    public boolean isMousePressed() {
         return mousePressed;
     }
 
@@ -84,14 +84,14 @@ public class ImageTest extends Application {
             itc.imageView.addEventHandler(MouseEvent.ANY, new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent event) {
-                    if(event.getEventType() == MouseEvent.MOUSE_CLICKED){
+                    if (event.getEventType() == MouseEvent.MOUSE_CLICKED) {
                         mousePosX = (int) event.getX();
                         mousePosY = (int) event.getY();
-                    }else if(event.isPrimaryButtonDown()){
+                    } else if (event.isPrimaryButtonDown()) {
                         mousePosX = (int) event.getX();
                         mousePosY = (int) event.getY();
                         mousePressed = true;
-                    }else {
+                    } else {
                         mousePressed = false;
                     }
                 }
@@ -105,7 +105,7 @@ public class ImageTest extends Application {
 
 
                 File file = fileChooser.showSaveDialog(primaryStage);
-                if(file != null){
+                if (file != null) {
                     BufferedImage bif = SwingFXUtils.fromFXImage(itc.imageView.getImage(), null);
                     String extension = fileChooser.getSelectedExtensionFilter().getExtensions().get(0).substring(2);
                     try {
@@ -175,14 +175,14 @@ public class ImageTest extends Application {
             });
 
             itc.closeButton.setOnAction(event -> {
-                if(primaryStage.isShowing()){
+                if (primaryStage.isShowing()) {
                     primaryStage.close();
                 }
             });
 
             itc.clearButton.setOnAction(event -> {
-                Image image = new Image("https://static-whitecastle-com.s3.amazonaws.com/spacer.gif");
-                itc.imageView.setImage(image);
+                Image img = itc.imageView.getImage();
+                itc.imageView.setImage(new WritableImage((int) img.getWidth(), (int) img.getHeight()));
             });
 
             zoomProperty.addListener(new InvalidationListener() {
