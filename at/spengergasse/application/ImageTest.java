@@ -180,6 +180,11 @@ public class ImageTest extends Application {
                 }
             });
 
+            itc.clearButton.setOnAction(event -> {
+                Image image = new Image("https://static-whitecastle-com.s3.amazonaws.com/spacer.gif");
+                itc.imageView.setImage(image);
+            });
+
             zoomProperty.addListener(new InvalidationListener() {
                 @Override
                 public void invalidated(Observable arg0) {
