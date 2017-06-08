@@ -81,10 +81,8 @@ public class ImageTest extends Application {
                 @Override
                 public void handle(MouseEvent event) {
                     if (event.isPrimaryButtonDown()) {
-                        System.out.println("Dragged");
-                        double splitDeviderWidth = itc.splitPane.getWidth() * itc.splitPane.getDividerPositions()[0];
-                        mousePosX = (int) (event.getSceneX() - splitDeviderWidth);
-                        mousePosY = (int) event.getSceneY();
+                        mousePosX = (int) event.getX();
+                        mousePosY = (int) event.getY();
                     }
                 }
             });
