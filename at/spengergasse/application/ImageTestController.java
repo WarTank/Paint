@@ -48,7 +48,11 @@ public class ImageTestController {
     @FXML
     public MenuItem closeButton;
 
+    @FXML
+    public Button brushButton;
 
+    @FXML
+    public Button eraserButton;
 
 
     public double test() {

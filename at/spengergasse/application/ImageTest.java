@@ -20,6 +20,7 @@ import javafx.scene.input.ScrollEvent;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import spengergasse.model.MousePositionThread;
+import spengergasse.model.Tool;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -183,6 +184,16 @@ public class ImageTest extends Application {
             itc.clearButton.setOnAction(event -> {
                 Image img = itc.imageView.getImage();
                 itc.imageView.setImage(new WritableImage((int) img.getWidth(), (int) img.getHeight()));
+            });
+
+            itc.brushButton.setOnAction(event -> {
+                mpt.setCurrentTool(Tool.PaintBrush);
+                itc.colorPicker.setDisable(false);
+            });
+
+            itc.eraserButton.setOnAction(event -> {
+                mpt.setCurrentTool(Tool.Eraser);
+                itc.colorPicker.setDisable(true);
             });
 
             zoomProperty.addListener(new InvalidationListener() {

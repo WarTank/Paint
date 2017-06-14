@@ -1,11 +1,14 @@
 package spengergasse.model;
 
 import com.sun.javafx.geom.Vec2d;
+import com.sun.org.apache.xpath.internal.SourceTree;
 import javafx.application.Platform;
 import javafx.scene.image.*;
 import javafx.scene.image.Image;
+import javafx.scene.paint.*;
 import spengergasse.application.ImageTest;
 import spengergasse.application.ImageTestController;
+
 
 public class MousePositionThread implements Runnable {
 
@@ -15,6 +18,10 @@ public class MousePositionThread implements Runnable {
     private PixelWriter pixelWriter;
     private Image image;
     private ImageTestController itc;
+
+    private Tool currentTool = Tool.PaintBrush;
+
+    private int imageX, imageY;
 
     private int x, y;
 
@@ -53,7 +60,7 @@ public class MousePositionThread implements Runnable {
 
                 image = itc.imageView.getImage();
 
-                int imageX, imageY;
+
                 imageX = (int) image.getWidth();
                 imageY = (int) image.getHeight();
 
@@ -67,22 +74,17 @@ public class MousePositionThread implements Runnable {
                 scaledX = (int) (x / itc.getScaleXRatio());
                 scaledY = (int) (y / itc.getScaleYRatio());
 
-                Vec2d currPos = new Vec2d(scaledX, scaledY);
-
-                if (isWithinNumbers(scaledX, 0, imageX) && isWithinNumbers(scaledY, 0, imageY) && imageTest.isMousePressed()) {
-
-                    if (prevCoords != null) {
-                        if (mousePressedLastFrame) {
-                            int amountOfPoints = (int) (getLengthOfVector(getVectorBetweenTwoPos(prevCoords, currPos)) / ((float) brushSize / 8));
-                            for (int i = 0; i < amountOfPoints; i++) {
-                                Vec2d point = getPointBetweenVectors(prevCoords, currPos, 1f / amountOfPoints * i);
-                                placeCircleAtCoordinates((int) point.x, (int) point.y, brushSize, imageX, imageY);
-                            }
-                        } else {
-                            placeCircleAtCoordinates(scaledX, scaledY, brushSize, imageX, imageY);
-                        }
-                    }
+                switch (currentTool){
+                    case PaintBrush:
+                        drawInterpolatedLine(itc.colorPicker.getValue());
+                        break;
+                    case Eraser:
+                        drawInterpolatedLine(new Color(1,1,1,0));
+                        break;
+                    default:
+                        System.out.print("INVALID TOOL SELECTED");
                 }
+
 
 
                 itc.imageView.setImage(wImage);
@@ -93,6 +95,28 @@ public class MousePositionThread implements Runnable {
         }
     }
 
+    private void drawInterpolatedLine(Color color) {
+        Vec2d currPos = new Vec2d(scaledX, scaledY);
+
+        if (isWithinNumbers(scaledX, 0, imageX) && isWithinNumbers(scaledY, 0, imageY) && imageTest.isMousePressed()) {
+
+            if (prevCoords != null) {
+                if (mousePressedLastFrame) {
+                    int amountOfPoints = (int) (getLengthOfVector(getVectorBetweenTwoPos(prevCoords, currPos)) / ((float) brushSize / 8));
+                    for (int i = 0; i < amountOfPoints; i++) {
+                        Vec2d point = getPointBetweenVectors(prevCoords, currPos, 1f / amountOfPoints * i);
+                        placeCircleAtCoordinates((int) point.x, (int) point.y, brushSize, imageX, imageY, color);
+                    }
+                } else {
+                    placeCircleAtCoordinates(scaledX, scaledY, brushSize, imageX, imageY, color);
+                }
+            }
+        }
+    }
+
+    public void setCurrentTool(Tool tool){
+        currentTool = tool;
+    }
 
     private Vec2d getPointBetweenVectors(Vec2d A, Vec2d B, float between) {
         Vec2d AB = getVectorBetweenTwoPos(A, B);
@@ -108,7 +132,7 @@ public class MousePositionThread implements Runnable {
         return (float) Math.sqrt(Math.pow(vec.x, 2) + Math.pow(vec.y, 2));
     }
 
-    private void placeCircleAtCoordinates(int x, int y, int size, int imageWidth, int imageHeight) {
+    private void placeCircleAtCoordinates(int x, int y, int size, int imageWidth, int imageHeight, Color color) {
         int halfBrushSize = size / 2;
 
         if (brushSize == 1) {
@@ -117,7 +141,7 @@ public class MousePositionThread implements Runnable {
             currentlyPlacingY = y;
 
             if ((isWithinNumbers(currentlyPlacingX, 0, imageWidth) && isWithinNumbers(currentlyPlacingY, 0, imageHeight))) {
-                placeColorFromPicker(currentlyPlacingX, currentlyPlacingY, pixelWriter);
+                pixelWriter.setColor(currentlyPlacingX, currentlyPlacingY, color);
             }
 
             return;
@@ -138,7 +162,7 @@ public class MousePositionThread implements Runnable {
                 if (isWithinRadius((int) vec2d.x, (int) vec2d.y, halfBrushSize)) {
                     //Checks whether this particular pixel would be out of bounds
                     if ((isWithinNumbers(currentlyPlacingX, 0, imageWidth) && isWithinNumbers(currentlyPlacingY, 0, imageHeight))) {
-                        placeColorFromPicker(currentlyPlacingX, currentlyPlacingY, pixelWriter);
+                        pixelWriter.setColor(currentlyPlacingX, currentlyPlacingY, color);
                     }
                 }
             }
