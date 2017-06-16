@@ -3,6 +3,7 @@ package spengergasse.application;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.FlowPane;
 
 public class ImageTestController {
 
@@ -53,6 +54,15 @@ public class ImageTestController {
 
     @FXML
     public Button eraserButton;
+
+    @FXML
+    public Button bucketButton;
+
+    @FXML
+    public FlowPane flowPane;
+
+    @FXML
+    public Button colorPickerButton;
 
 
     public double test() {

@@ -10,21 +10,25 @@ import javafx.beans.value.ObservableValue;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.image.Image;
+import javafx.scene.image.PixelWriter;
 import javafx.scene.image.WritableImage;
-import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.input.ScrollEvent;
+import javafx.scene.input.*;
+import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import spengergasse.model.MousePositionThread;
 import spengergasse.model.Tool;
 
 import javax.imageio.ImageIO;
+import javax.imageio.ImageWriter;
 import java.awt.image.BufferedImage;
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
 
 
 public class ImageTest extends Application {
@@ -121,7 +125,7 @@ public class ImageTest extends Application {
                 try {
                     FXMLLoader fxmlLoader = new FXMLLoader();
                     fxmlLoader.setLocation(getClass().getResource("ResolutionPopup.fxml"));
-                    Scene scene = new Scene(fxmlLoader.load(), 300, 110);
+                    Scene scene = new Scene(fxmlLoader.load(), 280, 125);
 
                     ResolutionPopupController rpc = fxmlLoader.getController();
 
@@ -134,6 +138,14 @@ public class ImageTest extends Application {
                         }
                     });
 
+                    rpc.xResTF.setOnAction(event1 -> {
+                        rpc.yResTF.requestFocus();
+                    });
+
+                    rpc.yResTF.setOnAction(event1 -> {
+                        rpc.doneButton.fire();
+                    });
+
                     rpc.yResTF.textProperty().addListener(new ChangeListener<String>() {
                         @Override
                         public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
@@ -143,10 +155,26 @@ public class ImageTest extends Application {
                         }
                     });
 
+
                     rpc.doneButton.setOnAction(event1 -> {
-                        WritableImage writableImage = new WritableImage(Integer.parseInt(rpc.xResTF.getText()), Integer.parseInt(rpc.yResTF.getText()));
-                        itc.imageView.setImage(writableImage);
-                        scene.getWindow().hide();
+                        try {
+                            WritableImage writableImage = new WritableImage(Integer.parseInt(rpc.xResTF.getText()), Integer.parseInt(rpc.yResTF.getText()));
+                            System.out.println(rpc.transparentCheckBox == null);
+                            if (!rpc.transparentCheckBox.isPressed()) {
+                                PixelWriter writer = writableImage.getPixelWriter();
+                                for (int x = 0; x < (int)writableImage.getWidth(); x++) {
+                                    for (int y = 0; y < (int)writableImage.getHeight(); y++){
+                                        writer.setColor(x,y, Color.WHITE);
+                                    }
+                                }
+                            }
+                            itc.imageView.setImage(writableImage);
+                            scene.getWindow().hide();
+                        }catch (Exception e){
+                            rpc.errorTF.setText("Error");
+                            rpc.xResTF.requestFocus();
+                        }
+
                     });
 
 
@@ -163,6 +191,8 @@ public class ImageTest extends Application {
 
             });
 
+            itc.newButton.setAccelerator(new KeyCodeCombination(KeyCode.N, KeyCombination.CONTROL_DOWN));
+
             itc.importButton.setOnAction(event -> {
                 FileChooser fileChooser = new FileChooser();
                 FileChooser.ExtensionFilter extensionFilter = new FileChooser.ExtensionFilter("Image Files", "*.jpg", "*.png");
@@ -175,11 +205,17 @@ public class ImageTest extends Application {
                 }
             });
 
+            itc.importButton.setAccelerator(new KeyCodeCombination(KeyCode.O, KeyCombination.CONTROL_DOWN));
+
             itc.closeButton.setOnAction(event -> {
                 if (primaryStage.isShowing()) {
                     primaryStage.close();
                 }
             });
+
+            itc.closeButton.setAccelerator(new KeyCodeCombination(KeyCode.Q, KeyCombination.CONTROL_DOWN));
+
+
 
             itc.clearButton.setOnAction(event -> {
                 Image img = itc.imageView.getImage();
@@ -196,33 +232,39 @@ public class ImageTest extends Application {
                 itc.colorPicker.setDisable(true);
             });
 
-            zoomProperty.addListener(new InvalidationListener() {
-                @Override
-                public void invalidated(Observable arg0) {
-                    itc.imageView.setFitWidth(zoomProperty.get() * 4);
-                    itc.imageView.setFitHeight(zoomProperty.get() * 3);
-                }
+            itc.bucketButton.setOnAction(event -> {
+                mpt.setCurrentTool(Tool.Bucket);
+                itc.colorPicker.setDisable(false);
+            });
+
+            itc.colorPickerButton.setOnAction(event -> {
+                mpt.setCurrentTool(Tool.EyeDropper);
+                itc.colorPicker.setDisable(false);
             });
 
 
-            itc.scrollPane.addEventFilter(ScrollEvent.ANY, new EventHandler<ScrollEvent>() {
-                public void handle(ScrollEvent event) {
-                    if (event.getDeltaY() > 0 && event.isControlDown()) {
-                        zoomProperty.set(zoomProperty.get() * 1.1);
-                    } else if (event.getDeltaY() < 0 && event.isControlDown()) {
-                        zoomProperty.set(zoomProperty.get() / 1.1);
-                    }
+            zoomProperty.addListener(arg0 -> {
+                itc.imageView.setFitWidth(zoomProperty.get() * 4);
+                itc.imageView.setFitHeight(zoomProperty.get() * 3);
+            });
+
+
+            itc.scrollPane.addEventFilter(ScrollEvent.ANY, event -> {
+                if (event.getDeltaY() > 0 && event.isControlDown()) {
+                    zoomProperty.set(zoomProperty.get() * 1.1);
+                } else if (event.getDeltaY() < 0 && event.isControlDown()) {
+                    zoomProperty.set(zoomProperty.get() / 1.1);
                 }
             });
 
             Scene scene = new Scene(root, 1280, 720);
             scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 
-            Image image = new Image("https://static-whitecastle-com.s3.amazonaws.com/spacer.gif");
+            Image image = new WritableImage(100, 100);
             itc.imageView.preserveRatioProperty().set(true);
 
             itc.imageView.setImage(image);
-            primaryStage.setTitle("Image Write Test");
+            primaryStage.setTitle("Paint Pro Plus");
             primaryStage.setScene(scene);
             primaryStage.show();
 

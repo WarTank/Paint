@@ -74,18 +74,24 @@ public class MousePositionThread implements Runnable {
                 scaledX = (int) (x / itc.getScaleXRatio());
                 scaledY = (int) (y / itc.getScaleYRatio());
 
-                switch (currentTool){
-                    case PaintBrush:
-                        drawInterpolatedLine(itc.colorPicker.getValue());
-                        break;
-                    case Eraser:
-                        drawInterpolatedLine(new Color(1,1,1,0));
-                        break;
-                    default:
-                        System.out.print("INVALID TOOL SELECTED");
+                if (imageTest.isMousePressed()) {
+                    switch (currentTool) {
+                        case PaintBrush:
+                            drawInterpolatedLine(itc.colorPicker.getValue());
+                            break;
+                        case Eraser:
+                            drawInterpolatedLine(new Color(1, 1, 1, 0));
+                            break;
+                        case Bucket:
+                            fill(pixelReader.getColor(scaledX, scaledY), itc.colorPicker.getValue(), scaledX, scaledY);
+                            break;
+                        case EyeDropper:
+                            itc.colorPicker.setValue(pixelReader.getColor(scaledX,scaledY));
+                            break;
+                        default:
+                            System.out.print("INVALID TOOL SELECTED");
+                    }
                 }
-
-
 
                 itc.imageView.setImage(wImage);
                 mousePressedLastFrame = imageTest.isMousePressed();
@@ -93,6 +99,11 @@ public class MousePositionThread implements Runnable {
                 prevCoords = new Vec2d(scaledX, scaledY);
             });
         }
+    }
+
+    private void fill(Color srccolor, Color targetcolor, int x, int y) {
+        boolean[][] mark = new boolean[imageX][imageY];
+        flood(wImage, mark, x, y, srccolor, targetcolor);
     }
 
     private void drawInterpolatedLine(Color color) {
@@ -114,7 +125,7 @@ public class MousePositionThread implements Runnable {
         }
     }
 
-    public void setCurrentTool(Tool tool){
+    public void setCurrentTool(Tool tool) {
         currentTool = tool;
     }
 
@@ -173,6 +184,27 @@ public class MousePositionThread implements Runnable {
         pixelWriter.setColor(x, y, itc.colorPicker.getValue());
     }
 
+    public void flood(WritableImage img, boolean[][] mark,
+                      int x, int y, Color srcColor, Color tgtColor) {
+
+        if (y < 0) return;
+        if (x < 0) return;
+        if (y >= img.getHeight()) return;
+        if (x >= img.getWidth()) return;
+
+        if (mark[x][y]) return;
+
+        if (!img.getPixelReader().getColor(x, y).equals(srcColor)) return;
+
+        img.getPixelWriter().setColor(x, y, tgtColor);
+        mark[x][y] = true;
+
+        flood(img, mark, x, y - 1, srcColor, tgtColor);
+        flood(img, mark, x, y + 1, srcColor, tgtColor);
+        flood(img, mark, x - 1, y, srcColor, tgtColor);
+        flood(img, mark, x + 1, y, srcColor, tgtColor);
+    }
+
     private Vec2d convertPositionsToVector(int x1, int y1, int x2, int y2) {
         return new Vec2d((x2 - x1), (y2 - y1));
     }
@@ -182,7 +214,7 @@ public class MousePositionThread implements Runnable {
     }
 
     private boolean isWithinNumbers(int n, int min, int max) {
-        return (n > min && n < max);
+        return (n >= min && n < max);
     }
 
 }

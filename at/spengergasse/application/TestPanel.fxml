@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.ColorPicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
@@ -13,6 +13,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
@@ -38,10 +39,10 @@
       </MenuBar>
    </top>
    <left>
-    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="495.0" prefWidth="220.0" BorderPane.alignment="CENTER">
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="495.0" prefWidth="201.0" BorderPane.alignment="CENTER">
       <children>
-        <ColorPicker fx:id="colorPicker" layoutX="28.0" layoutY="130.0" prefHeight="31.0" prefWidth="166.0" />
-        <TextField fx:id="brushSizeTF" layoutX="28.0" layoutY="88.0" prefHeight="31.0" prefWidth="44.0" text="1" />
+        <ColorPicker fx:id="colorPicker" layoutX="7.0" layoutY="142.0" prefHeight="31.0" prefWidth="188.0" />
+        <TextField fx:id="brushSizeTF" layoutX="6.0" layoutY="100.0" prefHeight="31.0" prefWidth="44.0" text="1" />
             <AnchorPane layoutX="28.0" layoutY="14.0" prefHeight="13.0" prefWidth="15.0" />
         <GridPane layoutX="25.0" layoutY="449.0" prefHeight="32.0" prefWidth="161.0" AnchorPane.bottomAnchor="14.0">
           <children>
@@ -56,13 +57,15 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
           </rowConstraints>
         </GridPane>
-            <Label layoutX="76.0" layoutY="93.0" text="Size" />
-            <ButtonBar layoutX="28.0" layoutY="14.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" prefWidth="200.0">
-              <buttons>
-                  <Button fx:id="eraserButton" mnemonicParsing="false" text="Eraser" textAlignment="CENTER" />
-                <Button fx:id="brushButton" mnemonicParsing="false" text="Brush" textAlignment="CENTER" />
-              </buttons>
-            </ButtonBar>
+            <Label layoutX="50.0" layoutY="105.0" text="Size" />
+            <FlowPane fx:id="flowPane" hgap="4.0" layoutX="6.0" layoutY="14.0" prefHeight="36.0" prefWidth="200.0" vgap="4.0">
+               <children>
+                  <Button fx:id="brushButton" mnemonicParsing="false" text="Brush" />
+                  <Button fx:id="eraserButton" mnemonicParsing="false" text="Eraser" />
+                  <Button fx:id="bucketButton" mnemonicParsing="false" text="Bucket" />
+                  <Button fx:id="colorPickerButton" mnemonicParsing="false" text="Color Picker" />
+               </children>
+            </FlowPane>
       </children>
     </AnchorPane>
    </left>
@@ -73,7 +76,10 @@
           <content>
                   <StackPane>
                      <children>
-                  <ImageView fx:id="imageView" fitHeight="337.0" fitWidth="431.359997483933" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="imageView" fitHeight="337.0" fitWidth="431.359997483933" pickOnBounds="true" preserveRatio="true">
+                           <cursor>
+                              <Cursor fx:constant="DEFAULT" />
+                           </cursor></ImageView>
                      </children>
                   </StackPane>
           </content>
