@@ -32,11 +32,10 @@ import java.io.IOException;
 
 
 public class ImageTest extends Application {
-    private int mousePosX;
-    private int mousePosY;
+
+    private int mousePosX, mousePosY;
     private boolean mousePressed;
 
-    //TODO
     private final DoubleProperty zoomProperty = new SimpleDoubleProperty(200);
 
     ImageTestController itc;
@@ -167,15 +166,15 @@ public class ImageTest extends Application {
                             System.out.println(rpc.transparentCheckBox == null);
                             if (!rpc.transparentCheckBox.isPressed()) {
                                 PixelWriter writer = writableImage.getPixelWriter();
-                                for (int x = 0; x < (int)writableImage.getWidth(); x++) {
-                                    for (int y = 0; y < (int)writableImage.getHeight(); y++){
-                                        writer.setColor(x,y, Color.WHITE);
+                                for (int x = 0; x < (int) writableImage.getWidth(); x++) {
+                                    for (int y = 0; y < (int) writableImage.getHeight(); y++) {
+                                        writer.setColor(x, y, Color.WHITE);
                                     }
                                 }
                             }
                             itc.imageView.setImage(writableImage);
                             scene.getWindow().hide();
-                        }catch (Exception e){
+                        } catch (Exception e) {
                             rpc.errorTF.setText("Error");
                             rpc.xResTF.requestFocus();
                         }

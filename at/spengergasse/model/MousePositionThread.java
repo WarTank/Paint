@@ -45,7 +45,7 @@ public class MousePositionThread implements Runnable {
             brushSize = itc.brushSizeTF.getText().isEmpty() ? 1 : Integer.parseInt(itc.brushSizeTF.getText());
 
             try {
-                Thread.sleep(20);
+                Thread.sleep(15);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -74,6 +74,7 @@ public class MousePositionThread implements Runnable {
                 scaledX = (int) (x / itc.getScaleXRatio());
                 scaledY = (int) (y / itc.getScaleYRatio());
 
+                //EXECUTE CODE ACCORDING TO CURRENT TOOL
                 if (imageTest.isMousePressed()) {
                     switch (currentTool) {
                         case PaintBrush:
@@ -93,6 +94,7 @@ public class MousePositionThread implements Runnable {
                     }
                 }
 
+                //UPDATE IMAGE
                 itc.imageView.setImage(wImage);
                 mousePressedLastFrame = imageTest.isMousePressed();
 
