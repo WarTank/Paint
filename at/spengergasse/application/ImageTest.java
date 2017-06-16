@@ -41,6 +41,8 @@ public class ImageTest extends Application {
 
     ImageTestController itc;
 
+    //GETTERS AND SETTERS
+
     public ImageTestController getItc() {
         return itc;
     }
@@ -68,7 +70,7 @@ public class ImageTest extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         try {
-            // Create Image and ImageView objects
+            // BEGIN SETUP
             FXMLLoader loader = new FXMLLoader(ImageTestController.class.getResource("TestPanel.fxml"));
             Parent root = loader.load();
             itc = loader.getController();
@@ -102,6 +104,7 @@ public class ImageTest extends Application {
                 }
             });
 
+            //BUTTONS
             itc.saveButton.setOnAction(event -> {
                 FileChooser fileChooser = new FileChooser();
                 FileChooser.ExtensionFilter extenstionFilterPng = new FileChooser.ExtensionFilter("Png File", "*.png");
@@ -120,6 +123,8 @@ public class ImageTest extends Application {
                     }
                 }
             });
+
+            itc.saveButton.setAccelerator(new KeyCodeCombination(KeyCode.S, KeyCombination.CONTROL_DOWN));
 
             itc.newButton.setOnAction(event -> {
                 try {
@@ -215,12 +220,12 @@ public class ImageTest extends Application {
 
             itc.closeButton.setAccelerator(new KeyCodeCombination(KeyCode.Q, KeyCombination.CONTROL_DOWN));
 
-
-
             itc.clearButton.setOnAction(event -> {
                 Image img = itc.imageView.getImage();
                 itc.imageView.setImage(new WritableImage((int) img.getWidth(), (int) img.getHeight()));
             });
+
+            //TOOL BUTTONS
 
             itc.brushButton.setOnAction(event -> {
                 mpt.setCurrentTool(Tool.PaintBrush);
@@ -242,12 +247,12 @@ public class ImageTest extends Application {
                 itc.colorPicker.setDisable(false);
             });
 
+            //ZOOMING
 
             zoomProperty.addListener(arg0 -> {
                 itc.imageView.setFitWidth(zoomProperty.get() * 4);
                 itc.imageView.setFitHeight(zoomProperty.get() * 3);
             });
-
 
             itc.scrollPane.addEventFilter(ScrollEvent.ANY, event -> {
                 if (event.getDeltaY() > 0 && event.isControlDown()) {
@@ -256,6 +261,8 @@ public class ImageTest extends Application {
                     zoomProperty.set(zoomProperty.get() / 1.1);
                 }
             });
+
+            //END SETUP
 
             Scene scene = new Scene(root, 1280, 720);
             scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
